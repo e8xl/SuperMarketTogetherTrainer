@@ -19,7 +19,7 @@ namespace SMTTrainer
 
         private void Awake()
         {
-            Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");
+            Logger.LogInfo($"插件 {MyPluginInfo.PLUGIN_GUID} 加载成功");
 
             // 注册goldManager,pointManager,employeesManager
             _goldManager = new GoldManager(Config, Logger);
@@ -28,24 +28,24 @@ namespace SMTTrainer
 
             // 绑定配置以显示Gold窗口
             _isGoldWindowEnabled = Config.Bind<bool>(
-                "Trainer",
-                "Enable Gold Trainer",
+                "修改器窗口",
+                "启用金币修改器",
                 false,
-                "Enable or disable the display of the Gold Trainer window.");
+                "打开金币修改器");
 
             // 绑定配置以显示Point窗口
             _isPointWindowEnabled = Config.Bind<bool>(
-                "Trainer",
-                "Enable Point Trainer",
+                "修改器窗口",
+                "启用特许经营点数修改器",
                 false,
-                "Enable or disable the display of the Point Trainer window.");
+                "打开金币修改器");
 
             // 绑定配置以显示Employees窗口
             _isEmployeesWindowEnabled = Config.Bind<bool>(
-                "Trainer",
-                "Enable Employees Trainer",
+                "修改器窗口",
+                "启用员工修改器",
                 false,
-                "Enable or disable the display of the Employees Trainer window.");
+                "打开员工修改器窗口");
 
             // 设置配置更改事件
             _isGoldWindowEnabled.SettingChanged += OnGoldWindowEnableChanged;

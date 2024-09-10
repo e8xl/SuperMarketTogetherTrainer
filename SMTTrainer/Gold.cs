@@ -16,10 +16,10 @@ namespace SMTTrainer
         {
             _logger = logger;
             _goldAmountConfig = config.Bind<int>(
-                "Gold",
-                "Add Gold Amount",
+                "金币",
+                "添加金币数量",
                 1000,
-                new ConfigDescription("The amount of gold to add in the game", null, new ConfigurationManagerAttributes { Browsable = false }));
+                new ConfigDescription("添加金币到游戏中", null, new ConfigurationManagerAttributes { Browsable = false }));
 
             _tempGoldAmount = _goldAmountConfig.Value.ToString();
         }
@@ -33,7 +33,7 @@ namespace SMTTrainer
         {
             if (_showWindow)
             {
-                _windowRect = GUILayout.Window(0, _windowRect, DrawWindowContent, "Gold Trainer");
+                _windowRect = GUILayout.Window(0, _windowRect, DrawWindowContent, "金币修改器");
 
                 _windowRect.x = (Screen.width - _windowRect.width) / 2;
                 _windowRect.y = (Screen.height - _windowRect.height) / 2;
@@ -42,12 +42,12 @@ namespace SMTTrainer
 
         private void DrawWindowContent(int windowID)
         {
-            GUILayout.Label($"Last added Gold: {_goldAmountConfig.Value}");
+            GUILayout.Label($"上次添加的金币数量： {_goldAmountConfig.Value}");
 
-            GUILayout.Label("Add Gold Amount:");
+            GUILayout.Label("添加金币数量：");
             _tempGoldAmount = GUILayout.TextField(_tempGoldAmount);
 
-            if (GUILayout.Button("Confirm"))
+            if (GUILayout.Button("提交"))
             {
                 if (int.TryParse(_tempGoldAmount, out int newGoldAmount))
                 {
@@ -56,7 +56,7 @@ namespace SMTTrainer
                 }
                 else
                 {
-                    _logger.LogError("Invalid input! Please enter a valid integer for the gold amount.");
+                    _logger.LogError("数值类型错误！");
                 }
             }
 
@@ -68,11 +68,11 @@ namespace SMTTrainer
             if (GameData.Instance != null)
             {
                 GameData.Instance.CmdAlterFundsWithoutExperience(newAmount);
-                _logger.LogInfo($"Gold in game set to: {newAmount}");
+                _logger.LogInfo($"金币添加了： {newAmount}");
             }
             else
             {
-                _logger.LogWarning("GameData.Instance is null, can't set gold.");
+                _logger.LogWarning("GameData.Instance巴拉巴拉巴拉巴拉");
             }
         }
     }
