@@ -16,16 +16,16 @@ namespace SMTTrainer
         {
             _logger = logger;
             _maxEmployeesConfig = config.Bind<int>(
-                "Employee Settings",
-                "Max Employees",
+                "员工设置",
+                "最大员工数量",
                 3,
-                new ConfigDescription("Maximum number of employees", null, new ConfigurationManagerAttributes { Browsable = false }));
+                new ConfigDescription("可支配员工最大数量", null, new ConfigurationManagerAttributes { Browsable = false }));
 
             _employeeSpeedConfig = config.Bind<float>(
-                "Employee Settings",
-                "Employee Speed Factor",
+                "员工设置",
+                "员工工作速度",
                 0.0f,
-                new ConfigDescription("Speed factor for employees", null, new ConfigurationManagerAttributes { Browsable = false }));
+                new ConfigDescription("员工工作速度（移动速度？", null, new ConfigurationManagerAttributes { Browsable = false }));
 
             ApplySettings();
         }
@@ -39,7 +39,7 @@ namespace SMTTrainer
         {
             if (_showWindow)
             {
-                _windowRect = GUILayout.Window(2, _windowRect, DrawWindowContent, "Employees Trainer");
+                _windowRect = GUILayout.Window(2, _windowRect, DrawWindowContent, "员工修改器");
 
                 _windowRect.x = (Screen.width - _windowRect.width) / 2;
                 _windowRect.y = (Screen.height - _windowRect.height) / 2;
@@ -48,16 +48,16 @@ namespace SMTTrainer
 
         private void DrawWindowContent(int windowID)
         {
-            GUILayout.Label($"Max Employees: {_maxEmployeesConfig.Value}");
-            GUILayout.Label($"Employee Speed Factor: {_employeeSpeedConfig.Value}");
+            GUILayout.Label($"最大员工数量： {_maxEmployeesConfig.Value}");
+            GUILayout.Label($"员工工作速度： {_employeeSpeedConfig.Value}");
 
-            GUILayout.Label("Set Max Employees:");
+            GUILayout.Label("设置最大员工数量：");
             _maxEmployeesConfig.Value = (int)GUILayout.HorizontalSlider(_maxEmployeesConfig.Value, 1, 100);
 
-            GUILayout.Label("Set Employee Speed Factor:");
+            GUILayout.Label("设置员工工作速度：");
             _employeeSpeedConfig.Value = GUILayout.HorizontalSlider(_employeeSpeedConfig.Value, 0.1f, 5.0f);
 
-            if (GUILayout.Button("Apply Settings"))
+            if (GUILayout.Button("应用设置"))
             {
                 ApplySettings();
             }
@@ -72,11 +72,11 @@ namespace SMTTrainer
                 NPC_Manager.Instance.maxEmployees = _maxEmployeesConfig.Value;
                 NPC_Manager.Instance.extraEmployeeSpeedFactor = _employeeSpeedConfig.Value;
                 NPC_Manager.Instance.UpdateEmployeesNumberInBlackboard();
-                _logger.LogInfo("Employee settings applied.");
+                _logger.LogInfo("员工设置已经应用");
             }
             else
             {
-                _logger.LogWarning("NPC_Manager.Instance is null, can't apply employee settings.");
+                _logger.LogWarning("NPC_Manager.Instance未加载，未成功设置员工属性");
             }
         }
     }

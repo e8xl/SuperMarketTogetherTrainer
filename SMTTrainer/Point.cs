@@ -16,10 +16,10 @@ namespace SMTTrainer
         {
             _logger = logger;
             _pointAmountConfig = config.Bind<int>(
-                "Point",
-                "Set Point Amount",
+                "特许经营点数",
+                "设置特许经营点数",
                 1,
-                new ConfigDescription("The amount of points to set in the game", null, new ConfigurationManagerAttributes { Browsable = false }));
+                new ConfigDescription("设置特许经营点数在游戏中", null, new ConfigurationManagerAttributes { Browsable = false }));
 
             _tempPointAmount = _pointAmountConfig.Value.ToString();
         }
@@ -42,12 +42,12 @@ namespace SMTTrainer
 
         private void DrawWindowContent(int windowID)
         {
-            GUILayout.Label($"Current Points: {_pointAmountConfig.Value}");
+            GUILayout.Label($"现存点数：{_pointAmountConfig.Value}");
 
-            GUILayout.Label("Set New Point Amount:");
+            GUILayout.Label("设置新的特许经营点数：");
             _tempPointAmount = GUILayout.TextField(_tempPointAmount);
 
-            if (GUILayout.Button("Confirm"))
+            if (GUILayout.Button("提交"))
             {
                 if (int.TryParse(_tempPointAmount, out int newPointAmount))
                 {
@@ -56,7 +56,7 @@ namespace SMTTrainer
                 }
                 else
                 {
-                    _logger.LogError("Invalid input! Please enter a valid integer for the point amount.");
+                    _logger.LogError("输入数据类型错误！请检查数据类型是否为整数型(int)");
                 }
             }
 
@@ -68,11 +68,11 @@ namespace SMTTrainer
             if (GameData.Instance != null)
             {
                 GameData.Instance.NetworkgameFranchisePoints = newAmount;
-                _logger.LogInfo($"Points in game set to: {newAmount}");
+                _logger.LogInfo($"设置特许经营点数为： {newAmount}");
             }
             else
             {
-                _logger.LogWarning("GameData.Instance is null, can't set points.");
+                _logger.LogWarning("GameData.Instance加载失败，设置特许经营点数失败！");
             }
         }
     }
