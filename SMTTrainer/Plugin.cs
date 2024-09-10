@@ -88,5 +88,10 @@ namespace SMTTrainer
                 _employeesManager.DrawWindow();
             }
         }
+        private void Update()
+        {
+            // 每帧检测 NPC_Manager 是否已经存在
+            _employeesManager.Update();
+        }
     }
 }

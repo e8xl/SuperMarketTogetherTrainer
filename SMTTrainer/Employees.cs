@@ -12,6 +12,8 @@ namespace SMTTrainer
         private Rect _windowRect = new Rect(0, 0, 300, 150);
         private bool _showWindow;
 
+        private bool _settingsApplied = false;
+
         public EmployeesManager(ConfigFile config, ManualLogSource logger)
         {
             _logger = logger;
@@ -24,10 +26,9 @@ namespace SMTTrainer
             _employeeSpeedConfig = config.Bind<float>(
                 "Employee Settings",
                 "Employee Speed Factor",
-                0.0f,
+                0.1f,
                 new ConfigDescription("Speed factor for employees", null, new ConfigurationManagerAttributes { Browsable = false }));
 
-            ApplySettings();
         }
 
         public void SetWindowVisibility(bool visible)
@@ -64,7 +65,14 @@ namespace SMTTrainer
 
             GUI.DragWindow();
         }
-
+        public void Update()
+        {
+            if (!_settingsApplied && NPC_Manager.Instance != null)
+            {
+                ApplySettings();
+                _settingsApplied = true; // 确保只应用一次
+            }
+        }
         private void ApplySettings()
         {
             if (NPC_Manager.Instance != null)
