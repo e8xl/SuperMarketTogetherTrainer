@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>SMTTrainer</AssemblyName>
     <Product>SuperMarketTogetherTrainer</Product>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RestoreAdditionalProjectSources>
@@ -31,10 +31,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Reference Include="0Harmony20">
-      <HintPath>lib\0Harmony20.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>lib\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
@@ -45,6 +41,10 @@
     </Reference>
     <Reference Include="Mirror">
       <HintPath>lib\Mirror.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.StarterAssets">
+      <HintPath>lib\Unity.StarterAssets.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">

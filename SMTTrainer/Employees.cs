@@ -20,13 +20,13 @@ namespace SMTTrainer
             _maxEmployeesConfig = config.Bind<int>(
                 "Employee Settings",
                 "Max Employees",
-                3,
+                1,
                 new ConfigDescription("Maximum number of employees", null, new ConfigurationManagerAttributes { Browsable = false }));
 
             _employeeSpeedConfig = config.Bind<float>(
                 "Employee Settings",
                 "Employee Speed Factor",
-                0.1f,
+                0.0f,
                 new ConfigDescription("Speed factor for employees", null, new ConfigurationManagerAttributes { Browsable = false }));
 
         }
